@@ -59,16 +59,31 @@ class Game
     # render player
     outputs.primitives << player.primitives
     # render ui
-    debug_data = "fps: #{gtk.current_framerate.round}, ticks: #{state.tick_count}"
+    debug_data = "fps: #{gtk.current_framerate.round}, ticks: #{state.tick_count}, player_direction: #{player.direction}"
     outputs.labels << [10, 30, debug_data]
   end
 
   def input
-    amount = 2
-    player.move_right(amount) if inputs.right && player.can_move_right?(level_solids, amount)
-    player.move_left(amount) if inputs.left && player.can_move_left?(level_solids, amount)
-    player.move_up(amount) if inputs.up && player.can_move_up?(level_solids, amount)
-    player.move_down(amount) if inputs.down && player.can_move_down?(level_solids, amount)
+    amount = 4
+    if inputs.right
+      player.look_right
+      player.move_right(amount) if player.can_move_right?(level_solids, amount)
+    end
+
+    if inputs.left
+      player.look_left
+      player.move_left(amount) if player.can_move_left?(level_solids, amount)
+    end
+
+    if inputs.up
+      player.look_up
+      player.move_up(amount) if player.can_move_up?(level_solids, amount)
+    end
+
+    if inputs.down
+      player.look_down
+      player.move_down(amount) if player.can_move_down?(level_solids, amount)
+    end
   end
 
   def calc
