@@ -2,9 +2,7 @@
 
 $gtk.reset
 
-$game = Game.new
-
 def tick(args)
-  $game.args = args
-  $game.tick
+  $level ||= Level1.new
+  $level.tick(args)
 end
