@@ -3,6 +3,6 @@
 $gtk.reset
 
 def tick(args)
-  $level ||= Level1.new
-  $level.tick(args)
+  args.state.level ||= Level1.new
+  args.state.level.tick(args)
 end

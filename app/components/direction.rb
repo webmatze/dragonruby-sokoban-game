@@ -26,10 +26,10 @@ class Direction < Draco::Component
 
   def to_angle
     case @points_to
-    when Direction::LEFT then 270
-    when Direction::RIGHT then 90
-    when Direction::UP then 180
-    when Direction::DOWN then 0
+    when Direction::LEFT then 0
+    when Direction::RIGHT then 180
+    when Direction::UP then 270
+    when Direction::DOWN then 90
     else
       0
     end
