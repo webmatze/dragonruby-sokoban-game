@@ -8,29 +8,26 @@ class GenerateLevel < Draco::System
   STORAGE = 4
 
   def tick(args)
-    tile_width = 64
     tiles = world.level_data.map_with_index do |row, y|
       row.map_with_index do |col, x|
-        x_pos = args.grid.left + (x * tile_width) + ((args.grid.w / 2) - (world.level_data.size * tile_width / 2))
-        y_pos = args.grid.top - tile_width - (y * tile_width) - ((args.grid.h / 2) - (row.size * tile_width / 2))
         case col
         when WALL
-          NewWall.new(position: { x: x_pos, y: y_pos }, size: { width: tile_width, height: tile_width })
+          NewWall.new(position: { x: x, y: y })
         when PLAYER
-          world.player.position.x = x_pos
-          world.player.position.y = y_pos
-          NewFloor.new(position: { x: x_pos, y: y_pos }, size: { width: tile_width, height: tile_width })
+          world.player.position.x = x
+          world.player.position.y = y
+          NewFloor.new(position: { x: x, y: y })
         when FLOOR
-          NewFloor.new(position: { x: x_pos, y: y_pos }, size: { width: tile_width, height: tile_width })
+          NewFloor.new(position: { x: x, y: y })
         when BOX
           [
-            NewBox.new(position: { x: x_pos, y: y_pos }, size: { width: tile_width, height: tile_width }),
-            NewFloor.new(position: { x: x_pos, y: y_pos }, size: { width: tile_width, height: tile_width })
+            NewBox.new(position: { x: x, y: y }),
+            NewFloor.new(position: { x: x, y: y })
           ]
         when STORAGE
           [
-            NewStorage.new(position: { x: x_pos, y: y_pos }, size: { width: tile_width, height: tile_width }),
-            NewFloor.new(position: { x: x_pos, y: y_pos }, size: { width: tile_width, height: tile_width })
+            NewStorage.new(position: { x: x, y: y }),
+            NewFloor.new(position: { x: x, y: y })
           ]
         end
       end

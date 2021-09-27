@@ -1,25 +1,22 @@
 # frozen_string_literal: true
 
-class RenderForegroundSprites < Draco::System
-  filter Tag(:foreground), Sprite, Position, Size
+class RenderForegroundSprites < RenderSystem
+  filter Tag(:foreground), Sprite, Position
 
   def tick(args)
-    sprites = entities.map(&method(:make_sprite))
+    sprites = entities.map do |entity|
+      make_sprite(entity, x_offset(args), y_offset(args))
+    end
 
     args.outputs.sprites << sprites
-    args.outputs.sprites << make_sprite(world.player)
-  end
+    args.outputs.sprites << make_sprite(world.player, x_offset(args), y_offset(args))
 
-  private
-
-  def make_sprite(entity)
-    {
-      x: entity.position.x,
-      y: entity.position.y,
-      w: entity.size.width,
-      h: entity.size.height,
-      angle: entity.sprite.angle,
-      path: entity.sprite.path
-    }
+    if world.debug?
+      labels = entities.map do |entity|
+        [entity.position.x, entity.position.y, "#{entity.position.x}:#{entity.position.y}"]
+      end
+      labels << [world.player.position.x, world.player.position.y, "#{world.player.position.x}:#{world.player.position.y}"]
+      args.outputs.labels << labels
+    end
   end
 end

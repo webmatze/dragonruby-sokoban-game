@@ -13,10 +13,15 @@ class Position < Draco::Component
   end
 
   def move_up(amount = 1)
-    @y += amount
+    @y -= amount
   end
 
   def move_down(amount = 1)
-    @y -= amount
+    @y += amount
   end
+
+  def to_point
+    { x: @x, y: @y }
+  end
+
 end
