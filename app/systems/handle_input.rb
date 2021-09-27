@@ -24,6 +24,10 @@ class HandleInput < Draco::System
         move_pushables(entity)
         entity.position.move_down if entity.can_move_down?(level_solids)
       end
+
+      if args.inputs.keyboard.key_up.escape
+        args.state.level = Level1.new
+      end
     end
   end
 
