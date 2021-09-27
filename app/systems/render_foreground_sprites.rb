@@ -18,5 +18,16 @@ class RenderForegroundSprites < RenderSystem
       labels << [world.player.position.x, world.player.position.y, "#{world.player.position.x}:#{world.player.position.y}"]
       args.outputs.labels << labels
     end
+
+    if world.solved?
+      args.outputs.labels << {
+        x: args.grid.w / 2,
+        y: args.grid.h / 2,
+        text: "SOLVED!",
+        size_enum: 60,
+        alignment_enum: 1,
+        vertical_alignment_enum: 1
+      }
+    end
   end
 end

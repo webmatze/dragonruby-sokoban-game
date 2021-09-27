@@ -5,24 +5,26 @@ class HandleInput < Draco::System
 
   def tick(args)
     entities.each do |entity|
-      if args.inputs.keyboard.key_down.right
-        move_pushables(entity)
-        entity.position.move_right if entity.can_move_right?(level_solids)
-      end
+      unless world.solved?
+        if args.inputs.keyboard.key_down.right
+          move_pushables(entity)
+          entity.position.move_right if entity.can_move_right?(level_solids)
+        end
 
-      if args.inputs.keyboard.key_down.left
-        move_pushables(entity)
-        entity.position.move_left if entity.can_move_left?(level_solids)
-      end
+        if args.inputs.keyboard.key_down.left
+          move_pushables(entity)
+          entity.position.move_left if entity.can_move_left?(level_solids)
+        end
 
-      if args.inputs.keyboard.key_down.up
-        move_pushables(entity)
-        entity.position.move_up if entity.can_move_up?(level_solids)
-      end
+        if args.inputs.keyboard.key_down.up
+          move_pushables(entity)
+          entity.position.move_up if entity.can_move_up?(level_solids)
+        end
 
-      if args.inputs.keyboard.key_down.down
-        move_pushables(entity)
-        entity.position.move_down if entity.can_move_down?(level_solids)
+        if args.inputs.keyboard.key_down.down
+          move_pushables(entity)
+          entity.position.move_down if entity.can_move_down?(level_solids)
+        end
       end
 
       if args.inputs.keyboard.key_up.escape

@@ -1,12 +1,13 @@
 # frozen_string_literal: true
 
 class Level1 < Draco::World
-  attr_accessor :debug
+  attr_accessor :debug, :solved
   entity NewPlayer, as: :player
 
   systems GenerateLevel
   systems HandleDirection
   systems HandleInput
+  systems CheckLevelSolved
   systems RenderBackgroundSprites
   systems RenderForegroundSprites
   systems RenderDebugData
@@ -24,6 +25,10 @@ class Level1 < Draco::World
 
   def tile_size
     64
+  end
+
+  def solved?
+    solved || false
   end
 
   def debug?
