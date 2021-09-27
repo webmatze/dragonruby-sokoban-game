@@ -47,16 +47,20 @@ class HandleInput < Draco::System
     pushables = level_pushables.select do |pushable|
       player_pos == pushable.position.to_point
     end
-    # check if pushable can be moved in direction
+
+    # check if pushable can be moved in direction and move
     pushables.each do |pushable|
       case entity.direction.points_to
-      when Direction::LEFT then pushable.position.move_left
-      when Direction::RIGHT then pushable.position.move_right
-      when Direction::UP then pushable.position.move_up
-      when Direction::DOWN then pushable.position.move_down
+      when Direction::LEFT
+        pushable.position.move_left if pushable.can_move_left?(level_solids)
+      when Direction::RIGHT
+        pushable.position.move_right if pushable.can_move_right?(level_solids)
+      when Direction::UP
+        pushable.position.move_up if pushable.can_move_up?(level_solids)
+      when Direction::DOWN
+        pushable.position.move_down if pushable.can_move_down?(level_solids)
       end
     end
-    # move in direction
   end
 
   def level_solids
