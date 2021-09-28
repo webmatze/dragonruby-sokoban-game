@@ -4,11 +4,11 @@ class RenderSystem < Draco::System
   protected
 
   def x_offset(args)
-    @x_offset ||= args.grid.left + ((args.grid.w / 2) - (world.level_data.size * world.tile_size / 2))
+    @x_offset ||= ((args.grid.w / 2) - (world.level_data.first.size * world.tile_size / 2))
   end
 
   def y_offset(args)
-    @y_offset ||= args.grid.top - world.tile_size - ((args.grid.h / 2) - (world.level_data.first.size * world.tile_size / 2))
+    @y_offset ||= args.grid.top - world.tile_size - ((args.grid.h / 2) - (world.level_data.size * world.tile_size / 2))
   end
 
   def make_sprite(entity, x_offset, y_offset)
