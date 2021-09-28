@@ -5,7 +5,13 @@ class HandleInput < Draco::System
 
   def tick(args)
     entities.each do |entity|
-      unless world.solved?
+      if world.solved?
+        if args.inputs.keyboard.key_down.space
+          next_level = args.state.level.current_level + 1
+          args.state.level = Level1.new
+          args.state.level.current_level = next_level if args.state.level.levels.size > next_level
+        end
+      else
         if args.inputs.keyboard.key_down.right
           move_pushables(entity)
           entity.position.move_right if entity.can_move_right?(level_solids)
@@ -36,7 +42,9 @@ class HandleInput < Draco::System
       end
 
       if args.inputs.keyboard.key_up.escape
+        current_level = args.state.level.current_level
         args.state.level = Level1.new
+        args.state.level.current_level = current_level
       end
     end
   end

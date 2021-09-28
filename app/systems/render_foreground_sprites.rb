@@ -20,14 +20,23 @@ class RenderForegroundSprites < RenderSystem
     end
 
     if world.solved?
-      args.outputs.labels << {
-        x: args.grid.w / 2,
-        y: args.grid.h / 2,
-        text: "SOLVED!",
-        size_enum: 60,
-        alignment_enum: 1,
-        vertical_alignment_enum: 1
-      }
+      args.outputs.labels << [
+        {
+          x: args.grid.w / 2,
+          y: args.grid.h / 2,
+          text: "SOLVED!",
+          size_enum: 60,
+          alignment_enum: 1,
+          vertical_alignment_enum: 1
+        },
+        {
+          x: args.grid.w / 2,
+          y: args.grid.h / 2 - 100,
+          text: "Press space for next level.",
+          size_enum: 24,
+          alignment_enum: 1,
+          vertical_alignment_enum: 1
+        }]
     end
   end
 end

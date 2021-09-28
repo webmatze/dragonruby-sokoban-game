@@ -13,7 +13,7 @@ class Level1 < Draco::World
   systems RenderDebugData
 
   def after_initialize
-    @current_level = 1
+    @current_level = 0
     @solved = false
     @tile_size = 64
   end
