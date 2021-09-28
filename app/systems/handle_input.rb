@@ -27,6 +27,14 @@ class HandleInput < Draco::System
         end
       end
 
+      if args.inputs.keyboard.key_up.plus
+        world.tile_size += 4 if world.tile_size < 64
+      end
+
+      if args.inputs.keyboard.key_up.hyphen
+        world.tile_size -= 4 if world.tile_size > 16
+      end
+
       if args.inputs.keyboard.key_up.escape
         args.state.level = Level1.new
       end
