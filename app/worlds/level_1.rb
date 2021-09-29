@@ -18,34 +18,29 @@ class Level1 < Draco::World
     @tile_size = 64
   end
 
-  def levels
-    [
-      [
-        [1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 2, 1],
-        [1, 0, 1, 1, 1, 1],
-        [1, 0, 3, 0, 4, 1],
-        [1, 1, 0, 3, 4, 1],
-        [nil, 1, 1, 1, 1, 1]
-      ],
-      [
-        [nil, nil, nil, nil, 1, 1, 1, 1, 1, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil],
-        [nil, nil, nil, nil, 1, 0, 0, 0, 1, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil],
-        [nil, nil, nil, nil, 1, 3, 0, 0, 1, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil],
-        [nil, nil, 1, 1, 1, 0, 0, 3, 1, 1, nil, nil, nil, nil, nil, nil, nil, nil, nil],
-        [nil, nil, 1, 0, 0, 3, 0, 3, 0, 1, nil, nil, nil, nil, nil, nil, nil, nil, nil],
-        [1, 1, 1, 0, 1, 0, 1, 1, 0, 1, nil, nil, nil, 1, 1, 1, 1, 1, 1],
-        [1, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 4, 4, 1],
-        [1, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 4, 1],
-        [1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 0, 0, 4, 4, 1],
-        [nil, nil, nil, nil, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [nil, nil, nil, nil, 1, 1, 1, 1, 1, 1, 1, nil, nil, nil, nil, nil, nil, nil, nil]
-      ]
-    ]
+  def level_data
+    @level_data ||= load_level
+  rescue StandardError
+    @current_level = 0
+    @level_data || load_level
   end
 
-  def level_data
-    levels[current_level]
+  def load_level
+    level_xsb_data = $gtk.read_file "/data/level_#{current_level}.xsb"
+    raise StandardError, "level file /data/level_#{@current_level}.xsb not found" unless level_xsb_data
+
+    level_xsb_data.each_line.map do |line|
+      line.split('').map do |char|
+        case char
+        when '_' then nil
+        when '#' then GenerateLevel::WALL
+        when '-' then GenerateLevel::FLOOR
+        when '$' then GenerateLevel::BOX
+        when '.' then GenerateLevel::STORAGE
+        when '@' then GenerateLevel::PLAYER
+        end
+      end
+    end
   end
 
   def solved?

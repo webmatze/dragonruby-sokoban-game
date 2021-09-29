@@ -47,7 +47,6 @@ class HandleInput < Draco::System
 
   def load_next_level(args)
     next_level = args.state.level.current_level + 1
-    next_level = 0 unless args.state.level.levels.size > next_level
     load_level(args, next_level)
   end
 
