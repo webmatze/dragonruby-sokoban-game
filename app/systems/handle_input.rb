@@ -7,9 +7,7 @@ class HandleInput < Draco::System
     entities.each do |entity|
       if world.solved?
         if args.inputs.keyboard.key_down.space
-          next_level = args.state.level.current_level + 1
-          args.state.level = Level1.new
-          args.state.level.current_level = next_level if args.state.level.levels.size > next_level
+          load_next_level(args)
         end
       else
         if args.inputs.keyboard.key_down.right
@@ -42,11 +40,20 @@ class HandleInput < Draco::System
       end
 
       if args.inputs.keyboard.key_up.escape
-        current_level = args.state.level.current_level
-        args.state.level = Level1.new
-        args.state.level.current_level = current_level
+        load_level(args, args.state.level.current_level)
       end
     end
+  end
+
+  def load_next_level(args)
+    next_level = args.state.level.current_level + 1
+    next_level = 0 unless args.state.level.levels.size > next_level
+    load_level(args, next_level)
+  end
+
+  def load_level(args, level)
+    args.state.level               = Level1.new
+    args.state.level.current_level = level
   end
 
   private
