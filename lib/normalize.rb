@@ -36,10 +36,13 @@ class Normalize
   end
 
   def self.fill_outer_area(data)
+    max_row_length = data.sort_by(&:size).last.size
     data.map.with_index do |row, y|
       row.map.with_index do |col, x|
         data[y][x] = '_' if col == ' '
       end
+      fill = max_row_length - row.size
+      fill.times { row << '_' }
     end
   end
 
