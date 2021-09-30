@@ -3,3 +3,5 @@
 smaug
 logs
 builds
+.bundle/
+bin/
