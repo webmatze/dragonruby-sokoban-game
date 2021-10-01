@@ -37,6 +37,8 @@ class Level1 < Draco::World
         when '$' then GenerateLevel::BOX
         when '.' then GenerateLevel::STORAGE
         when '@' then GenerateLevel::PLAYER
+        when '+' then GenerateLevel::PLAYER_ON_STORAGE
+        when '*' then GenerateLevel::BOX_ON_STORAGE
         end
       end
     end
