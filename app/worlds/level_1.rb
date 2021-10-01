@@ -4,6 +4,7 @@ class Level1 < Draco::World
   attr_accessor :debug, :solved, :current_level, :tile_size
   entity NewPlayer, as: :player
 
+  systems LoadLevels
   systems GenerateLevel
   systems HandleDirection
   systems HandleInput
@@ -20,17 +21,15 @@ class Level1 < Draco::World
 
   def level_data
     @level_data ||= load_level
-  rescue StandardError
+  rescue StandardError => e
+    puts e.message, e.backtrace
     @current_level = 0
     @level_data || load_level
   end
 
   def load_level
-    level_xsb_data = $gtk.read_file "/data/level_#{current_level}.xsb"
-    raise StandardError, "level file /data/level_#{@current_level}.xsb not found" unless level_xsb_data
-
-    level_xsb_data.each_line.map do |line|
-      line.split('').map do |char|
+    $gtk.args.state.levels[current_level].map do |line|
+      line.map do |char|
         case char
         when '_' then nil
         when '#' then GenerateLevel::WALL
