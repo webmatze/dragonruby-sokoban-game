@@ -21,7 +21,7 @@ class Normalize
       x, y = stack.pop
 
       cur_col = data[y][x]
-      next unless [' ', '@', '.', '$'].include? cur_col
+      next unless [' ', '@', '.', '$', '+', '*'].include? cur_col
 
       data[y][x] = '-' if cur_col == ' '
       next if checked.include? [x, y]
@@ -50,7 +50,7 @@ class Normalize
     pos = []
     data.each_with_index do |row, y|
       row.each_with_index do |col, x|
-        pos = [x, y] if col.eql? '@'
+        pos = [x, y] if ['@', '+'].include? col
       end
     end
     pos

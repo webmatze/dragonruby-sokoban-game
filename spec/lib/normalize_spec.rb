@@ -12,6 +12,15 @@ RSpec.describe Normalize do
       ]
       expect(described_class.get_player_pos(data)).to eql([1, 1])
     end
+
+    it 'finds correct coordinates of player on goal tile' do
+      data = [
+        '   '.split(''),
+        '   '.split(''),
+        '  +'.split('')
+      ]
+      expect(described_class.get_player_pos(data)).to eql([2, 2])
+    end
   end
 
   describe '#call' do
@@ -51,6 +60,28 @@ RSpec.describe Normalize do
 
     it 'normalizes data' do
       expect(result).to eql(expected_result)
+    end
+
+    context 'with player on goal and box on goal' do
+      let(:xsb) do
+        [
+          '######',
+          '#+ * #',
+          '######'
+        ].join("\n")
+      end
+
+      let(:expected_result) do
+        [
+          '######',
+          '#+-*-#',
+          '######'
+        ].map { |row| row.split('') }
+      end
+
+      it 'normalizes data' do
+        expect(result).to eql(expected_result)
+      end
     end
   end
 end
