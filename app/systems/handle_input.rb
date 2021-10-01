@@ -42,6 +42,10 @@ class HandleInput < Draco::System
       if args.inputs.keyboard.key_up.escape
         load_level(args, args.state.level.current_level)
       end
+
+      if args.inputs.keyboard.key_down.n
+        load_next_level(args)
+      end
     end
   end
 
