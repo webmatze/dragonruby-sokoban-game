@@ -46,6 +46,10 @@ class HandleInput < Draco::System
       if args.inputs.keyboard.key_down.n
         load_next_level(args)
       end
+
+      if args.inputs.keyboard.key_down.d
+        world.debug = !world.debug
+      end
     end
   end
 

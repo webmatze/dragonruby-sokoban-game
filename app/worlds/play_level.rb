@@ -40,7 +40,9 @@ class PlayLevel < Draco::World
   end
 
   def load_level
-    levels.to_a[current_level].data.map do |line|
+    level = levels.to_a[current_level]
+    puts "load level #{level.level_data.name}..."
+    level.data.map do |line|
       line.map do |char|
         case char
         when '_' then nil
