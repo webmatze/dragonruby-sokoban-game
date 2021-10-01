@@ -3,14 +3,16 @@
 class CheckLevelSolved < Draco::System
   filter Pushable
 
+  STORAGE_TARGETS = [GenerateLevel::STORAGE, GenerateLevel::BOX_ON_STORAGE, GenerateLevel::PLAYER_ON_STORAGE].freeze
+
   def tick(_args)
     solved = entities.any? && entities.all? do |entity|
-      world.level_data[entity.position.y][entity.position.x] == GenerateLevel::STORAGE
+      STORAGE_TARGETS.include? world.level_data[entity.position.y][entity.position.x]
     end
-    if solved
-      world.solved = true
-      world.systems.delete(CheckLevelSolved)
-      world.systems.delete(HandleDirection)
-    end
+    return unless solved
+
+    world.solved = true
+    world.systems.delete(CheckLevelSolved)
+    world.systems.delete(HandleDirection)
   end
 end
