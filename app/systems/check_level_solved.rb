@@ -4,7 +4,7 @@ class CheckLevelSolved < Draco::System
   filter Pushable
 
   def tick(_args)
-    solved = entities.all? do |entity|
+    solved = entities.any? && entities.all? do |entity|
       world.level_data[entity.position.y][entity.position.x] == GenerateLevel::STORAGE
     end
     if solved

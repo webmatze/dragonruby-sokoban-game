@@ -5,3 +5,4 @@ logs
 builds
 .bundle/
 bin/
+/exceptions/

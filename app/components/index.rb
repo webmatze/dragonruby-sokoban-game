@@ -2,6 +2,7 @@
 
 require 'app/components/collides.rb'
 require 'app/components/direction.rb'
+require 'app/components/level_data.rb'
 require 'app/components/player_controlled.rb'
 require 'app/components/position.rb'
 require 'app/components/pushable.rb'

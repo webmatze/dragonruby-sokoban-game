@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Level1 < Draco::World
+class PlayLevel < Draco::World
   attr_accessor :debug, :solved, :current_level, :tile_size
   entity NewPlayer, as: :player
 
@@ -19,6 +19,18 @@ class Level1 < Draco::World
     @tile_size = 64
   end
 
+  def reset
+    @solved = false
+    @level_data = nil
+    @entities.select_entities(Draco::Tag(:background)).each do |entity|
+      @entities.delete(entity)
+    end
+    @entities.select_entities(Draco::Tag(:foreground)).each do |entity|
+      @entities.delete(entity)
+    end
+    @systems.push(GenerateLevel)
+  end
+
   def level_data
     @level_data ||= load_level
   rescue StandardError => e
@@ -28,7 +40,7 @@ class Level1 < Draco::World
   end
 
   def load_level
-    $gtk.args.state.levels[current_level].map do |line|
+    levels.to_a[current_level].data.map do |line|
       line.map do |char|
         case char
         when '_' then nil
@@ -50,5 +62,9 @@ class Level1 < Draco::World
 
   def debug?
     debug
+  end
+
+  def levels
+    entities.select_entities Draco::Tag(:level_data)
   end
 end

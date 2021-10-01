@@ -55,8 +55,8 @@ class HandleInput < Draco::System
   end
 
   def load_level(args, level)
-    args.state.level               = Level1.new
     args.state.level.current_level = level
+    args.state.level.reset
   end
 
   private
