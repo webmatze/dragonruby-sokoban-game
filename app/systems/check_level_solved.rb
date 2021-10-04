@@ -13,6 +13,5 @@ class CheckLevelSolved < Draco::System
 
     world.solved = true
     world.systems.delete(CheckLevelSolved)
-    world.systems.delete(HandleDirection)
   end
 end
