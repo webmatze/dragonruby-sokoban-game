@@ -29,6 +29,7 @@ class PlayLevel < Draco::World
       @entities.delete(entity)
     end
     @systems.push(GenerateLevel)
+    @systems.push(CheckLevelSolved)
   end
 
   def level_data
