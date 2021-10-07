@@ -8,7 +8,7 @@ class LoadLevels < Draco::System
 
     level = Level.new(level_data: { raw_data: [], name: "no name" })
 
-    levels_data = $gtk.read_file "/data/Birthday.txt"
+    levels_data = $gtk.read_file "/data/FuerEnnaUndVigo.txt"
     levels_data.lines.each do |line|
       line = line.chomp
       if line.trim.empty?
