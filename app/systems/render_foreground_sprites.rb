@@ -11,6 +11,11 @@ class RenderForegroundSprites < RenderSystem
     args.outputs.sprites << sprites
     args.outputs.sprites << make_sprite(world.player, x_offset(args), y_offset(args))
 
+    args.outputs.labels << {
+      text: "level: #{world.current_level + 1} | moves: #{world.history.size}",
+      vertical_alignment_enum: 0, x: 10, y: 10
+    }
+
     if world.debug?
       labels = entities.map do |entity|
         [entity.position.x, entity.position.y, "#{entity.position.x}:#{entity.position.y}"]

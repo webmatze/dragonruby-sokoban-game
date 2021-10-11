@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PlayLevel < Draco::World
-  attr_accessor :debug, :solved, :current_level, :tile_size
+  attr_accessor :debug, :solved, :current_level, :tile_size, :history
   entity NewPlayer, as: :player
 
   systems LoadLevels
@@ -17,11 +17,13 @@ class PlayLevel < Draco::World
     @current_level = 0
     @solved = false
     @tile_size = 64
+    @history = []
   end
 
   def reset
     @solved = false
     @level_data = nil
+    @history = []
     @entities.select_entities(Draco::Tag(:background)).each do |entity|
       @entities.delete(entity)
     end

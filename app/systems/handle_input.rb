@@ -12,22 +12,34 @@ class HandleInput < Draco::System
       else
         if args.inputs.keyboard.key_down.right
           move_pushables(entity)
-          entity.position.move_right if entity.can_move_right?(level_solids)
+          if entity.can_move_right?(level_solids)
+            entity.position.move_right
+            world.history << :r
+          end
         end
 
         if args.inputs.keyboard.key_down.left
           move_pushables(entity)
-          entity.position.move_left if entity.can_move_left?(level_solids)
+          if entity.can_move_left?(level_solids)
+            entity.position.move_left
+            world.history << :l
+          end
         end
 
         if args.inputs.keyboard.key_down.up
           move_pushables(entity)
-          entity.position.move_up if entity.can_move_up?(level_solids)
+          if entity.can_move_up?(level_solids)
+            entity.position.move_up
+            world.history << :u
+          end
         end
 
         if args.inputs.keyboard.key_down.down
           move_pushables(entity)
-          entity.position.move_down if entity.can_move_down?(level_solids)
+          if entity.can_move_down?(level_solids)
+            entity.position.move_down
+            world.history << :d
+          end
         end
       end
 
