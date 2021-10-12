@@ -35,11 +35,11 @@ class RenderForegroundSprites < RenderSystem
       debug_label(entity.position.x, entity.position.y, "#{entity.position.x}:#{entity.position.y}", args)
     end
     labels << debug_label(world.player.position.x, world.player.position.y, "#{world.player.position.x}:#{world.player.position.y}", args)
-    args.outputs.labels << labels
+    args.outputs.debug << labels
   end
 
   def debug_label(x, y, text, args)
-    { x: tile_x(x, args) + 5, y: tile_y(y, args) + 10, text: text, size_enum: 2, vertical_alignment_enum: 0, r: 128, g: 0, b: 0 }
+    { x: tile_x(x, args) + 5, y: tile_y(y, args) + 10, text: text, size_enum: 2, vertical_alignment_enum: 0, r: 128, g: 0, b: 0 }.label
   end
 
   def render_world_solved(args)
