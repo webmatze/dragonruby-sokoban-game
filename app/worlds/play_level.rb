@@ -8,6 +8,7 @@ class PlayLevel < Draco::World
   systems GenerateLevel
   systems HandleDirection
   systems HandleInput
+  systems CheckBoxOnTarget
   systems CheckLevelSolved
   systems RenderBackgroundSprites
   systems RenderForegroundSprites

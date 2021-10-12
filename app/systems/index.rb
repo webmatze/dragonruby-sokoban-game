@@ -3,6 +3,7 @@
 require 'app/systems/render_system.rb'
 require 'app/systems/generate_level.rb'
 require 'app/systems/check_level_solved.rb'
+require 'app/systems/check_box_on_target.rb'
 require 'app/systems/handle_direction.rb'
 require 'app/systems/handle_input.rb'
 require 'app/systems/load_levels.rb'
