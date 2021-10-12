@@ -14,7 +14,7 @@ class RenderForegroundSprites < RenderSystem
 
   def render_labels(args)
     args.outputs.labels << {
-      text: "level: #{world.current_level + 1} | moves: #{world.history.size}",
+      text: "Level #{world.current_level + 1}: \"#{world.level.level_data.name.trim}\" | Moves: #{world.history.size}",
       vertical_alignment_enum: 0, x: 10, y: 10
     }
   end

@@ -43,7 +43,6 @@ class PlayLevel < Draco::World
   end
 
   def load_level
-    level = levels.to_a[current_level]
     puts "load level #{level.level_data.name}..."
     level.data.map do |line|
       line.map do |char|
@@ -59,6 +58,10 @@ class PlayLevel < Draco::World
         end
       end
     end
+  end
+
+  def level
+    levels.to_a[current_level]
   end
 
   def solved?
