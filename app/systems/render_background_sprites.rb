@@ -6,11 +6,11 @@ class RenderBackgroundSprites < RenderSystem
   def tick(args)
     # render background tiles
     args.outputs.sprites << background_tiles.map do |entity|
-      make_sprite(entity, x_offset(args), y_offset(args))
+      make_sprite(entity, args)
     end
     # render Storage tiles
     args.outputs.sprites << storage_tiles.map do |entity|
-      make_sprite(entity, x_offset(args), y_offset(args))
+      make_sprite(entity, args)
     end
   end
 
