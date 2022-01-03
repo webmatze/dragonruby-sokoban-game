@@ -18,8 +18,11 @@ class LoadLevels < Draco::System
         puts "new level", level
       elsif line.start_with? ';'
         # load level name
+        puts "level name #{line[1..]}"
         level.level_data.name = line[1..]
+        puts level
       else
+        puts "push line #{line}"
         level.level_data.raw_data.push line
       end
     end
