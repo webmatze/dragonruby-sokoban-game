@@ -2,6 +2,10 @@
 
 I try to rebuild Sokoban in DragonRuby.
 
+## Gameplay
+
+![Animated Gif of gameplay](.github/dragonruby-sokoban.gif)
+
 ## Install dependencies
 
 ```bash
