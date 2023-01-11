@@ -1,16 +1,16 @@
 [project]
 # The name of your game's executable. This should only contain a-z, A-Z, 0-9, _ or -.
-name = "sokoban"
+name = "dragonruby-sokoban"
 # The game's title. This will show up in the tile bar of your executable.
 title = "Dragonruby Sokoban"
-version = "0.1.0"
-authors = ["Mathias Karstaedt <mathias.karstaedt@gmail.com>"]
+version = "0.1"
+authors = ["Mathias Karstaedt"]
 icon = "metadata/icon.png"
 compile_ruby = false
 
 [dragonruby]
-version = "2.26"
-edition = "standard"
+version = "4.0"
+edition = "pro"
 
 [dependencies]
 draco = "https://github.com/guitsaru/draco.git"

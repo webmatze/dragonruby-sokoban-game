@@ -18,9 +18,10 @@ GEM
 
 PLATFORMS
   x86_64-darwin-19
+  x86_64-darwin-20
 
 DEPENDENCIES
   rspec (~> 3)
 
 BUNDLED WITH
-   2.2.27
+   2.3.7

@@ -3,8 +3,8 @@
 
 devid=webmatze
 devtitle=Mathias Karstaedt &lt;mathias.karstaedt@gmail.com&gt;
-gameid=sokoban
+gameid=dragonruby-sokoban
 gametitle=Dragonruby Sokoban
-version=0.1.0
+version=0.1
 icon=metadata/icon.png
 compile_ruby=false
